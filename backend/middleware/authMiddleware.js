@@ -9,8 +9,10 @@ module.exports = async (req, res, next) => {
     const token = req.cookies.token;
 
     // If no token is present, block access
-    if (!token) return res.status(401).json({ message: 'Unauthorized' });
- 
+    if (!token) {
+      console.log("No token found in cookies"); //for debugging
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
     // Verify the token using the secret key
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -18,7 +20,7 @@ module.exports = async (req, res, next) => {
     req.user = await User.findByPk(decoded.id);
     next();
   } catch (err) {
-
+    console.log("JWT error:", err.message); //debugging
     // If anything fails (invalid token, user not found), return 401
     res.status(401).json({ message: 'Unauthorized' });
   }

@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('./index'); //imports your database connection (from models/index.js)
+const { DataTypes } = require("sequelize");
+const sequelize = require("./index"); //imports your database connection (from models/index.js)
 
-const User = sequelize.define('User', {
+const User = sequelize.define("User", {
   username: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },

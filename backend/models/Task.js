@@ -7,7 +7,7 @@ const Task = sequelize.define('Task', {
   description: { type: DataTypes.TEXT },
 });
 
-User.hasMany(Task, { foreignKey: 'userId' });
+User.hasMany(Task, { foreignKey: 'userId', onDelete: "CASCADE" });
 Task.belongsTo(User, { foreignKey: 'userId' });
 
 module.exports = Task;

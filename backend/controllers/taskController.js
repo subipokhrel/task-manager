@@ -11,16 +11,22 @@ exports.getTasks = async (req, res) => {
 };
 
 exports.addTask = async (req, res) => {
-  // Destructure title and description from the request body
-  const { title, description } = req.body;
-  // Create a new task entry in the database, linked to the logged-in user
-  const task = await Task.create({ 
-    title, 
-    description, 
-    userId: req.user.id, // Link task to the current user
-  });
-  // Return the created task with 201 Created status
-  res.status(201).json(task);
+  try{
+    console.log("req.user:", req.user); //for debugging
+    // Destructure title and description from the request body
+    const { title, description } = req.body;
+    // Create a new task entry in the database, linked to the logged-in user
+    const task = await Task.create({ 
+      title, 
+      description, 
+      userId: req.user.id, // Link task to the current user
+    });
+    // Return the created task with 201 Created status
+    res.status(201).json(task);
+  } catch (error) {
+    console.error("Error while creating task:", error); 
+    res.status(500).json({ message: "Failed to create task", error: error.message });
+  }
 };
 
 exports.deleteTask = async (req, res) => {
