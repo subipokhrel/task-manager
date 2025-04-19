@@ -24,7 +24,17 @@ const Register = () => {
       alert("Registration successful!");
       navigate("/"); //To login page
     } catch (err) {
-      alert("Error during registration.");
+      // 1) Log the raw Axios error
+      console.error("Registration error (full):", err);
+    
+      // 2) If the server sent a JSON error message, log that too
+      if (err.response?.data) {
+        console.error("Server response data:", err.response.data);
+      }
+    
+      // 3) Show the user something more informative
+      const msg = err.response?.data?.error || err.message || "Unknown error";
+      alert("Registration failed: " + msg);
     }
   };
 
@@ -34,6 +44,7 @@ const Register = () => {
       <input
         name="username"
         placeholder="Username"
+        value={form.username}
         onChange={handleChange}
         required
       />
@@ -42,6 +53,7 @@ const Register = () => {
         name="email"
         type="email"
         placeholder="Email"
+        value={form.email}
         onChange={handleChange}
         required
       />
@@ -50,6 +62,7 @@ const Register = () => {
         name="password"
         type="password"
         placeholder="Password"
+        value={form.password}
         onChange={handleChange}
         required
       />

@@ -29,6 +29,10 @@ const Login = () => {
     }
   };
 
+  const handleRegisterClick = () => {
+    navigate("/register"); // Redirect to signup page
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
@@ -47,6 +51,9 @@ const Login = () => {
         required
       />
       <button type="submit">Login</button>
+      <button type="button" onClick={handleRegisterClick}>
+        Register
+      </button>
     </form>
   );
 };
