@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // useNavigate helps redirect user after registration
+import "../styles/Auth.css";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -24,22 +25,25 @@ const Register = () => {
       alert("Registration successful!");
       navigate("/"); //To login page
     } catch (err) {
-      // 1) Log the raw Axios error
+      // Log the raw Axios error
       console.error("Registration error (full):", err);
-    
-      // 2) If the server sent a JSON error message, log that too
+
+      // If the server sent a JSON error message, log that too
       if (err.response?.data) {
         console.error("Server response data:", err.response.data);
       }
-    
-      // 3) Show the user something more informative
+
+      // Show the user something more informative
       const msg = err.response?.data?.error || err.message || "Unknown error";
       alert("Registration failed: " + msg);
     }
   };
+  const handleLoginRedirect = () => {
+    navigate("/"); // Navigate to login
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="auth-container" onSubmit={handleSubmit}>
       <h2>Register</h2>
       <input
         name="username"
@@ -48,7 +52,6 @@ const Register = () => {
         onChange={handleChange}
         required
       />
-
       <input
         name="email"
         type="email"
@@ -57,7 +60,6 @@ const Register = () => {
         onChange={handleChange}
         required
       />
-      
       <input
         name="password"
         type="password"
@@ -67,6 +69,13 @@ const Register = () => {
         required
       />
       <button type="submit">Register</button>
+      <button
+        type="button"
+        onClick={handleLoginRedirect}
+        style={{ marginTop: "10px" }}
+      >
+        Already have an account?
+      </button>
     </form>
   );
 };

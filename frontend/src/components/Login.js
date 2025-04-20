@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-
+import "../styles/Auth.css";
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const { setIsAuthenticated } = useContext(AuthContext);   // From AuthContext, this lets us update global "isAuthenticated" value
@@ -34,7 +34,7 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="auth-container" onSubmit={handleSubmit}>
       <h2>Login</h2>
       <input
         name="email"
