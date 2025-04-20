@@ -33,7 +33,7 @@
 }
 
 .task-form textarea {
-  width: 450px;
+  width: 459px;
   padding: 8px;
   margin-bottom: 10px;
   font-size: 14px;
@@ -100,13 +100,13 @@
 .delete-icons {
   display: flex;
   flex-direction: column;
-  gap: 13px;
-  margin-top: 50px;
+  margin-top: 36px;
 }
 
 .delete-icon {
   background: none;
   border: none;
+  padding: 9px;
   font-size: 17px;
   cursor: pointer;
   color: #d9534f;
