@@ -24,7 +24,7 @@
 }
 
 .task-form input {
-  width: 160px;
+  width: 200px;
   padding: 8px;
   margin-bottom: 10px;
   font-size: 14px;
@@ -52,7 +52,7 @@
 }
 
 .task-form button:hover {
-  background-color: #45a049;
+  background-color: #2cb8cf;
 }
 
 .table-with-icons {
@@ -70,15 +70,19 @@
   border: 1px solid #efeeee;
   font-size: 16px;
 }
-.task-table th,
-.task-table td {
+.task-table th{
+  background-color: #0daec8;
+  color: #ffffff;
+  font-weight: bold;
+  /* text-transform: uppercase; */
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
-
-.task-table th {
-  background-color: #e7e7e7;
+.task-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
 .task-table thead tr:first-child th:first-child {
@@ -95,6 +99,26 @@
 
 .task-table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 4px;
+}
+
+.sno-col {
+  width: 42px;
+  text-align: center;
+}
+
+.title-col {
+  width: 150px;
+  text-align: center;
+}
+
+.description-col {
+  width: 400px;
+  text-align: center;
+}
+
+.status-col {
+  width: 5px;
+  text-align: center;
 }
 
 .delete-icons {

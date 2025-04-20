@@ -21,6 +21,7 @@ app.use(cors({
 
 app.use('/', require('./routes/authRoutes')); //for /register and /login
 app.use('/', require('./routes/taskRoutes')); //for /tasks, /tasks/:id
+app.use('/', require('./routes/userRoutes'));
 
 // Sync models with the database, then start the server
 sequelize.sync().then(() => {

@@ -3,6 +3,19 @@ import axios from "axios";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
+  const [user, setUser] = useState(null);
+
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/me", {
+        withCredentials: true,
+      });
+      setUser(res.data);
+    } catch (err) {
+      console.error("Failed to fetch user:", err);
+    }
+  };
+
   const [tasks, setTasks] = useState([]); // State to store the list of all tasks
   const [newTask, setNewTask] = useState({
     title: "",
@@ -66,13 +79,17 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchTasks();
+    fetchUser();
   }, []);
 
   return (
     <div className="dashboard-container">
       <main className="main-content">
-        <h1>Welcome Back 👋</h1>
-
+        <h1>
+          <span style={{ color: "#0daec8" }}>
+            Hello {user ? user.username : "User"}
+          </span>
+        </h1>
         <form className="task-form" onSubmit={handleAdd}>
           <input
             name="title"
@@ -97,10 +114,10 @@ const Dashboard = () => {
           <table className="task-table">
             <thead>
               <tr>
-                <th>S No.</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th className="sno-col">S No.</th>
+                <th className="title-col">Title</th>
+                <th className="description-col">Description</th>
+                <th className="status-col">Status</th>
               </tr>
             </thead>
             <tbody>
