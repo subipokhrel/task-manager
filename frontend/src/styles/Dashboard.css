@@ -1,0 +1,119 @@
+.dashboard-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.main-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.task-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.task-form input::placeholder,
+.task-form textarea::placeholder {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #666565; 
+  font-style: normal; 
+}
+
+.task-form input {
+  width: 160px;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.task-form textarea {
+  width: 450px;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.task-form button {
+  background-color: #0daec8;
+  color: white;
+  width: 85px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.task-form button:hover {
+  background-color: #45a049;
+}
+
+.table-with-icons {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.task-table {
+  border-spacing: 0;
+  width: 100%;
+  border-spacing: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #efeeee;
+  font-size: 16px;
+}
+.task-table th,
+.task-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.task-table th {
+  background-color: #e7e7e7;
+}
+
+.task-table thead tr:first-child th:first-child {
+  border-top-left-radius: 4px;
+}
+
+.task-table thead tr:first-child th:last-child {
+  border-top-right-radius: 4px;
+}
+
+.task-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 4px;
+}
+
+.task-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 4px;
+}
+
+.delete-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-top: 50px;
+}
+
+.delete-icon {
+  background: none;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  color: #d9534f;
+  transition: color 0.2s ease-in-out, transform 0.2s;
+}
+
+.delete-icon:hover {
+  color: darkred;
+  transform: scale(1.1);
+}
