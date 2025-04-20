@@ -3,7 +3,11 @@ import axios from "axios";
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]); // State to store the list of all tasks
-  const [newTask, setNewTask] = useState({ title: "", description: "" }); // For new task inputs
+  const [newTask, setNewTask] = useState({
+    title: "",
+    description: "",
+    status: "Not Started",
+  }); // For new task inputs
 
   const fetchTasks = async () => {
     try {
@@ -22,7 +26,7 @@ const Dashboard = () => {
       await axios.post("http://localhost:5000/tasks", newTask, {
         withCredentials: true,
       });
-      setNewTask({ title: "", description: "" }); // Clear form
+      setNewTask({ title: "", description: "", status: "Not Started" }); // Clear form
       fetchTasks(); // Reload task list
     } catch (err) {
       alert("Failed to add task.");
@@ -37,6 +41,20 @@ const Dashboard = () => {
       fetchTasks(); // Reload tasks after deletion
     } catch (err) {
       alert("Delete failed.");
+    }
+  };
+
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      const taskToUpdate = tasks.find((task) => task.id === id);
+      await axios.put(
+        `http://localhost:5000/tasks/${id}`,
+        { ...taskToUpdate, status: newStatus },
+        { withCredentials: true }
+      );
+      fetchTasks();
+    } catch (err) {
+      alert("Failed to update status.");
     }
   };
 
@@ -64,13 +82,34 @@ const Dashboard = () => {
             setNewTask({ ...newTask, description: e.target.value })
           }
         />
+        <select
+          value={newTask.status}
+          onChange={(e) =>
+            setNewTask({ ...newTask, status: e.target.value })
+          }
+        >
+          <option>Not Started</option>
+          <option>In Progress</option>
+          <option>Done</option>
+          <option>Deferred</option>
+        </select>
         <button type="submit">Add Task</button>
       </form>
 
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            <strong>{task.title}</strong>: {task.description}
+            <strong>{task.title}</strong>: <br /> {task.description} <br />
+            <em>Status:</em>{" "}
+            <select
+              value={task.status}
+              onChange={(e) => handleStatusChange(task.id, e.target.value)}
+            >
+              <option>Not Started</option>
+              <option>In Progress</option>
+              <option>Done</option>
+              <option>Deferred</option>
+            </select>
             <button onClick={() => handleDelete(task.id)}>❌</button>
           </li>
         ))}

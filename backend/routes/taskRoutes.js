@@ -3,7 +3,7 @@ const express = require('express');
 // Create a router instance
 const router = express.Router();
 // Import task-related controller functions
-const { getTasks, addTask, deleteTask } = require('../controllers/taskController');
+const { getTasks, addTask, deleteTask, updateTask } = require('../controllers/taskController');
 // Import the auth middleware to protect routes
 const auth = require('../middleware/authMiddleware');
 
@@ -11,6 +11,7 @@ const auth = require('../middleware/authMiddleware');
 router.get('/tasks', auth, getTasks);
 // Define POST /tasks - add a new task for logged-in user
 router.post('/tasks', auth, addTask);
+router.put('/tasks/:id', auth, updateTask);
 // Define DELETE /tasks/:id - delete a task by ID (only if user owns it)
 router.delete('/tasks/:id', auth, deleteTask);
 
