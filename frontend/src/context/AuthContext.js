@@ -7,10 +7,22 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Check token (basic simulation)
+  // Check token by verifying with backend
   useEffect(() => {
-    const token = document.cookie.includes("token");
-    setIsAuthenticated(token);
+    const verifyAuth = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/verify", {
+          withCredentials: true, // important to include cookies
+        });
+        if (response.status === 200) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+
+    verifyAuth();
   }, []);
 
   return (
