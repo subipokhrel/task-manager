@@ -2,6 +2,24 @@
   padding: 20px;
   font-family: Arial, sans-serif;
 }
+.logout-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+.logout-icon:hover {
+  transform: scale(1.1);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
 
 .main-content {
   max-width: 800px;
@@ -30,15 +48,21 @@
   font-size: 14px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+  color: #666565; 
+  font-style: normal;
 }
 
 .task-form textarea {
-  width: 459px;
+  width: 415px;
   padding: 8px;
   margin-bottom: 10px;
   font-size: 14px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+  color: #666565; 
+  font-style: normal;
 }
 
 .task-form button {

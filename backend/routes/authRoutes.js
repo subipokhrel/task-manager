@@ -12,6 +12,15 @@ const authMiddleware = require('../middleware/authMiddleware');
 router.post('/register', register);
 // Define POST /login route that uses the login controller
 router.post('/login', login);
+//for logout
+router.post('/logout', (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    sameSite: 'Lax',
+    secure: false,
+  });
+  res.status(200).json({ message: 'Logout successful' });
+});
 // Token verification route
 router.get('/api/verify', authMiddleware, (req, res) => {
   res.status(200).json({ message: "Authenticated" });

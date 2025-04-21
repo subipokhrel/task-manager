@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
-
+  const [tasks, setTasks] = useState([]); // State to store the list of all tasks
+  const [newTask, setNewTask] = useState({
+    title: "",
+    description: "",
+    status: "Not Started",
+  }); // For new task inputs
+  const navigate = useNavigate();
   const fetchUser = async () => {
     try {
       const res = await axios.get("http://localhost:5000/me", {
@@ -15,14 +22,6 @@ const Dashboard = () => {
       console.error("Failed to fetch user:", err);
     }
   };
-
-  const [tasks, setTasks] = useState([]); // State to store the list of all tasks
-  const [newTask, setNewTask] = useState({
-    title: "",
-    description: "",
-    status: "Not Started",
-  }); // For new task inputs
-
   const fetchTasks = async () => {
     try {
       const res = await axios.get("http://localhost:5000/tasks", {
@@ -77,6 +76,20 @@ const Dashboard = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "http://localhost:5000/logout",
+        {},
+        { withCredentials: true }
+      );
+      navigate("/"); // Redirect to login page
+    } catch (err) {
+      console.error("Logout failed:", err.response?.data || err.message);
+      alert("Logout failed.");
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
     fetchUser();
@@ -85,11 +98,19 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <main className="main-content">
-        <h1>
-          <span style={{ color: "#0daec8" }}>
-            Hello {user ? user.username : "User"}
-          </span>
-        </h1>
+        <div className="dashboard-header">
+          <h1>
+            <span style={{ color: "#0daec8" }}>
+              Hello {user ? user.username : "User"}
+            </span>
+          </h1>
+            <img
+              src={require("../assets/sign-out.png")}
+              alt="Logout"
+              onClick={handleLogout}
+              className="logout-icon"
+            />
+        </div>
         <form className="task-form" onSubmit={handleAdd}>
           <input
             name="title"
@@ -123,7 +144,7 @@ const Dashboard = () => {
             <tbody>
               {tasks.map((task, index) => (
                 <tr key={task.id}>
-                  <td>{index + 1}</td>
+                  <td style={{ textAlign: "center" }}>{index + 1}</td>
                   <td>{task.title}</td>
                   <td>{task.description}</td>
                   <td>

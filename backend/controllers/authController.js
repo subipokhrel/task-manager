@@ -44,7 +44,8 @@ exports.login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        sameSite: "None",
+        sameSite: "Lax",
+        secure: false,
         maxAge: 24 * 60 * 60 * 1000,
       }) // Helps prevent XSS attacks
       .json({ message: "Login successful" });
